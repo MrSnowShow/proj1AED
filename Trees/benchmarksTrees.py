@@ -27,13 +27,14 @@ def generateRandoms(l, countries):
     
     # Se calhar um pais tipo Northern Mariana Islands que nao tem dados
     if (ls == None):
-        randomYear = str(random.randrange(1960, 2016))
-        randomVal = ""
+        randomYear = random.randrange(1960, 2016)
+        randomVal = random.randrange(0, 100)
     else:
         anos = ls.getNodeVals(tname)[2]
         valores = ls.getNodeVals(tname)[3]
-        randomYear = anos[random.randrange(0, len(anos))]
-        randomVal = valores[random.randrange(0, len(valores))]
+        randomIndex = random.randrange(0, len(anos))
+        randomYear = int(anos[randomIndex])
+        randomVal = float(valores[randomIndex])
     
     return(randomPais, randomCod, randomYear, randomVal)
     
@@ -73,15 +74,15 @@ def testing():
     l2 = readCsv('dados.csv')
     l3 = readCsv('dados.csv')
     l4 = readCsv('dados.csv')
-    tuploPaises = readCountries('dados.csv') # Usado como argumento para criar randoms    
-    
+    tuploPaises = readCountries('dados.csv') # Usado como argumento para criar randoms
+    randoms = generateRandoms(l, tuploPaises)    
     
     temposPro = [0]
     temposIns = [0]
     temposRem = [0]
-    temposEdi = [0]
+    temposEdi = [0]    
     
-    ciclos = 1000
+    ciclos = 3000
     for i in range(ciclos):
         randoms = generateRandoms(l, tuploPaises)
         temposPro.append(temposPro[-1] + timeProcurar(l, randoms))
@@ -101,6 +102,7 @@ def testing():
     plt.ylabel('Time (ms)')
     plt.xlabel('Operations (n)')
     plt.show()
+    
     
     
 testing()
