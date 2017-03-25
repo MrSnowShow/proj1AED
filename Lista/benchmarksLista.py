@@ -30,8 +30,8 @@ def generateRandoms(l, countries):
         randomYear = auxListaPaises[randomIndexPais].getAno()    
         randomVal = l.search(randomPais, None, randomYear)[0].getVal()        
     else:
-        randomYear = str(random.randrange(1960, 2016))
-        randomVal = ""
+        randomYear = random.randrange(1960, 2016)
+        randomVal = random.uniform(0, 100)
     return (randomPais, randomCod, randomYear, randomVal)
     
 def timeProcurar(l, randoms):
@@ -71,14 +71,15 @@ def testing():
     l3 = readCsv('dados.csv')
     l4 = readCsv('dados.csv')
     tuploPaises = readCountries('dados.csv') # Usado como argumento para criar randoms
-    randoms = generateRandoms(l, tuploPaises)
     
     temposPro = [0]
     temposIns = [0]
     temposRem = [0]
     temposEdi = [0]
+
     
-    ciclos = 1000
+    
+    ciclos = 3000
     for i in range(ciclos):
         randoms = generateRandoms(l, tuploPaises)
         temposPro.append(temposPro[-1] + timeProcurar(l, randoms))

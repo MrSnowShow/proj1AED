@@ -3,8 +3,8 @@ class Node:
     def __init__(self, pais, codPais, ano, val):
         self.pais = pais
         self.codPais = codPais
-        self.ano = ano
-        self.val = val
+        self.ano = int(ano)
+        self.val = float(val)
 
         self.next = None
 

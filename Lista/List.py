@@ -1,4 +1,4 @@
-from Lista.node import Node
+from Node import Node
 
 class List:
 
@@ -30,38 +30,40 @@ class List:
 
         while(current != None):
 
-            if eq and pais:
-                if current.getPais() == pais:
-                    eq = True
-                else: eq = False
-
-            if eq and codPais:
-                if current.getCodPais() == codPais:
-                    eq = True
-                else: eq = False
-            if eq and ano:
-                if current.getAno() == ano:
-                    eq = True
-                else:
+            if pais:
+                if current.getPais() != pais:
                     eq = False
-            if eq and val:
-                if current.getVal() == val:
 
-                    eq = True
-                else:
+
+            if codPais:
+                if current.getCodPais() != codPais:
+                    eq = False
+
+            if ano:
+                if current.getAno() != ano:
+                    eq = False
+
+            if val:
+                if current.getVal() != val:
                     eq = False
 
             if eq:
                 if (previous == None):
                     self.head = current.getNext()
+                    current = self.head
+                    previous = None
                 else:
-                    self.printOneNode(previous.getNext())
                     previous.setNext(current.getNext())
+                    previous = previous
+                    current = previous.getNext()
             else:
                 eq = True
+                previous = current
+                current = current.getNext()
 
-            previous = current
-            current = current.getNext()
+
+
+
         return False
 
     def add(self, pais, codPais, ano, val):

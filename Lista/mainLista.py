@@ -44,7 +44,8 @@ def procurar(l, pais=None, codPais=None, ano=None, val=None):
     ls = []
     ls = l.search(pais, codPais, ano, val)
 
-    #l.printNode(ls)
+    if ls:
+    	l.printNode(ls)
 
 
 def inserir(l, pais, codPais, ano, val):
@@ -58,11 +59,10 @@ def editar(l, pais=None, codPais=None,  ano=None, val=None, npais=None, ncodPais
 def main():
     l = readCsv('dados.csv')
     print('\nAntes\n')    
-    procurar(l, pais="Portugal", ano="2000")
+    procurar(l, pais="Portugal", codPais=None, ano=2000, val=None)
     
     print('\nDepois\n')
-    editar(l, pais="Portugal", nval="putas")    
-    procurar(l, pais="Portugal", ano="2000")
+    editar(l, pais=None, codPais="PRT", ano=None, val=None, npais="Lusitania", ncodPais=None, nano=2017, nval=25.6)
+    procurar(l, codPais="PRT")
     
 #main()
-
