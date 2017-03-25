@@ -42,6 +42,7 @@ def remover(l, pais = None, codPais = None, ano = None, val = None):
 def procurar(l, pais = None, codPais = None, ano = None, val = None):
     ls = []
     ls = l.search(codPais, pais, ano, val)
+
     for r in ls:
         print(r.printNode())
 
@@ -59,14 +60,14 @@ def main():
 
     print('\t\t\t*******Antes***********')
     #print('\t\t\t1.º procurar')
-    procurar(l, codPais='PRY')
+    #procurar(l, codPais='PRY')
     print('\t\t\t*******************')
-    remover(l, pais='Paraguay', ano=2010)
+    #remover(l, pais='Paraguay', ano=2010)
     #print('\t\t\t2.º procurar')
     print('\t\t\t***********Depois*********')
-    procurar(l, codPais='PRY')
+    procurar(l, pais="Ukraine", codPais=None, ano=None, val=None)
     print('*******************')
 
-#main()
+main()
 
 

@@ -1,5 +1,5 @@
 import sys
-from BTree.tnode import TNode
+from Tnode import TNode
 
 class bst:
 
@@ -29,42 +29,14 @@ class bst:
         return l
 
     def cmp(self, r, pais = None, ano = None, val = None):
-        eq = False
+        eq = True
 
-        if pais:
-            if r.getPais() == pais:
-                eq = True
-                if ano:
-                    if r.getAno() == ano:
-                        eq = True
-                        if val:
-                            if r.getVal() == val:
-                                eq = True
-                            else: eq = False
-                    else:
-                        eq = False
-                elif val:
-                    if r.getVal() == val:
-                        eq = True
-                    else:
-                        eq = False
-            else:
-                eq = False
-        elif ano:
-            if r.getAno() == ano:
-                eq = True
-                if val:
-                    if r.getVal() == val:
-                        eq = True
-                    else: eq = False
-            else:
-                eq = False
-        elif val:
-            if r.getVal() == val:
-
-                eq = True
-            else:
-                eq = False
+        if pais and r.getPais() != pais:
+            eq = False
+        if ano and r.getAno() != ano:
+            eq = False
+        if val and r.getVal() != val:
+            eq = False
 
         return eq
 
@@ -151,6 +123,7 @@ class bst:
 
                 if nval:
                     r.setVal(nval)
+
 
 
                 self.insere(r.getPais(), r.getCodPais(), r.getAno(), r.getVal())
