@@ -1,4 +1,4 @@
-from Node import Node
+from Lista.node import Node
 
 class List:
 
@@ -23,37 +23,42 @@ class List:
 
         current = self.head
         previous = None
-        igual = False
+        eq = True
 
         if(current == None):
             return False
 
         while(current != None):
 
-            if pais:
+            if eq and pais:
                 if current.getPais() == pais:
-                    igual = True
-                else: igual = False
+                    eq = True
+                else: eq = False
 
-            if codPais:
+            if eq and codPais:
                 if current.getCodPais() == codPais:
-                    igual = True
-                else: igual = False
-            if ano:
+                    eq = True
+                else: eq = False
+            if eq and ano:
                 if current.getAno() == ano:
-                    igual = True
+                    eq = True
                 else:
-                    igual = False
-            if ano:
+                    eq = False
+            if eq and val:
                 if current.getVal() == val:
-                    igual = True
+
+                    eq = True
                 else:
-                    igual = False
-            if igual:
+                    eq = False
+
+            if eq:
                 if (previous == None):
                     self.head = current.getNext()
                 else:
+                    self.printOneNode(previous.getNext())
                     previous.setNext(current.getNext())
+            else:
+                eq = True
 
             previous = current
             current = current.getNext()
@@ -94,8 +99,6 @@ class List:
                 current = current.getNext()
         return l
 
-
-
     def searchCodPais(self, lNode, codPais):
         l = []
         if len(lNode) > 0:
@@ -109,7 +112,6 @@ class List:
                     l.append(current)
                 current = current.getNext()
         return l
-
 
     def searchAno(self, lNode, ano):
         l = []
@@ -126,7 +128,6 @@ class List:
 
         return l
 
-
     def searchVal(self, lNode, val):
         l = []
         if len(lNode) > 0:
@@ -142,7 +143,6 @@ class List:
 
 
         return l
-
 
     def search(self, pais = None, codPais = None, ano = None, val = None):
 
@@ -170,7 +170,6 @@ class List:
 
         return lNode
 
-
     def printNode(self, lNode):
 
         for node in lNode:
@@ -181,6 +180,16 @@ class List:
                 print('Código: ', node.getCodPais())
                 print('Ano: ', node.getAno())
                 print('Taxa: ', node.getVal())
+
+    def printOneNode(self, node):
+
+        if node:
+            print('**********')
+            print('')
+            print('Pais: ', node.getPais())
+            print('Código: ', node.getCodPais())
+            print('Ano: ', node.getAno())
+            print('Taxa: ', node.getVal())
 
 
     def printList(self):
@@ -195,9 +204,10 @@ class List:
 
             current = current.getNext()
 
-
     def edit(self, pais = None, codPais = None, ano = None, val = None, nPais = None, nCodPais = None, nAno = None, nVal = None):
+
         ls = self.search(pais, codPais, ano, val)
+
         for n in ls:
             if nPais:
                 pais = nPais
@@ -221,3 +231,6 @@ class List:
 
             self.remove(n.getPais(), n.getCodPais(), n.getAno(), n.getVal())
             self.add(pais, codPais, ano, val)
+
+
+
