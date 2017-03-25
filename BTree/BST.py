@@ -1,5 +1,5 @@
 import sys
-from Tnode import TNode
+from BTree.tnode import TNode
 
 class bst:
 
@@ -133,10 +133,7 @@ class bst:
     def edit(self, codPais = None, pais = None, ano = None, val = None, ncodPais = None, npais = None, nano = None, nval = None):
 
         l = []
-        #print('\n\tEdit Pais: ', pais)
-        #print('\tEdit Ano: ', ano)
-        #print('\tEdit Novo Val: ', nval)
-        #print('\t\t\tNo EDITAR')
+
         l = self.search(codPais, pais, ano, val)
 
 
@@ -155,10 +152,6 @@ class bst:
                 if nval:
                     r.setVal(nval)
 
-                #print('r.getPais(): ', r.getPais())
-                #print('r.getCodPais(): ', r.getCodPais())
-                #print('r.getAno(): ', r.getAno())
-                #print('r.getVal(): ',  r.getVal())
 
                 self.insere(r.getPais(), r.getCodPais(), r.getAno(), r.getVal())
 
