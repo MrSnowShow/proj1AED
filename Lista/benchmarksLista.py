@@ -42,8 +42,8 @@ def timeProcurar(l, randoms):
     return (end-start)*1000
 
 def timeInserir(l, randoms):
-    randomYear = str(random.randrange(1960, 2016))
-    randomVal = str(random.randrange(0, 100))
+    randomYear = random.randrange(1960, 2016)
+    randomVal = random.uniform(0, 100)
     
     start = timer()
     inserir(l, pais=randoms[0], codPais=randoms[1], ano=randomYear, val=randomVal)
@@ -59,10 +59,12 @@ def timeRemover(l, randoms):
     return (end-start)*1000
         
 def timeEditar(l, randoms):
-    randVal = str(random.randrange(0, 100))
+    randVal = random.uniform(0, 100)
+    
     start = timer()
-    editar(l, pais=randoms[0], codPais=randoms[1], ano=randoms[2], val=randoms[3], npais="Padi", ncodPais="P8L", nano="2017", nval=randVal)
+    editar(l, pais=randoms[0], codPais=randoms[1], ano=randoms[2], val=randoms[3], nval=randVal)
     end = timer()
+
     return (end-start)*1000
         
 def testing():
@@ -76,8 +78,6 @@ def testing():
     temposIns = [0]
     temposRem = [0]
     temposEdi = [0]
-
-    
     
     ciclos = 3000
     for i in range(ciclos):
