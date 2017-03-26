@@ -37,12 +37,11 @@ def readCsv(file):
 
 
 def remover(l, pais = None, codPais = None, ano = None, val = None):
-    l.remover(codPais, pais, ano, val)
+    l.remover(pais, codPais, ano, val)
 
 def procurar(l, pais = None, codPais = None, ano = None, val = None):
     ls = []
-    ls = l.search(codPais, pais, ano, val)
-
+    ls = l.search(pais, codPais, ano, val)
     for r in ls:
         print(r.printNode())
 
@@ -51,7 +50,7 @@ def inserir(l, pais, codPais, ano, val):
 
 def editar(l, pais = None, codPais = None, ano = None, val = None, npais = None, ncodPais = None, nano = None, nval = None):
 
-    l.edit(codPais, pais, ano, val, ncodPais, npais, nano, nval)
+    l.edit(pais, codPais, ano, val, ncodPais, npais, nano, nval)
 
 
 def main():
@@ -59,15 +58,16 @@ def main():
     l = readCsv('dados.csv')
 
     print('\t\t\t*******Antes***********')
-    #print('\t\t\t1.º procurar')
-    #procurar(l, codPais='PRY')
-    print('\t\t\t*******************')
-    #remover(l, pais='Paraguay', ano=2010)
-    #print('\t\t\t2.º procurar')
+    procurar(l, pais ="Portugal", codPais = None, ano = None, val = None)
+
+    #procurar(l, pais = None, codPais = None, ano = None, val = None)
+    #inserir(l, "Northern Mariana Islands", "MLTA", 2017, 200)
+    #remover(l, pais = None, codPais="PRT", ano = None, val = None)
+    editar(l, pais = "Portugal", codPais = "PRT", ano = 2000, val = 100, npais = None, ncodPais = None, nano = None, nval = 50)
     print('\t\t\t***********Depois*********')
-    procurar(l, pais="Ukraine", codPais=None, ano=None, val=None)
+    procurar(l, pais = None, codPais = "PRT", ano = None, val = None)
+
     print('*******************')
+    
 
 main()
-
-

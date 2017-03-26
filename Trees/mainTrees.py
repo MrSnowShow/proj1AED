@@ -37,7 +37,8 @@ def readCsv(file):
 
 
 def remover(l,pais=None, codPais=None, ano=None, val=None):
-    l.remover(pais, codPais, ano, val)
+    if (not l.checkTreesEmpty()):
+        l.remover(pais, codPais, ano, val)
 
 
 def procurar(l, pais=None, codPais=None, ano=None, val=None):
@@ -58,7 +59,10 @@ def editar(l,pais=None, codPais=None, ano=None, val=None, npais=None, ncodPais=N
 
 def main():
     l = readCsv('dados.csv')
-    
-    procurar(l, pais="Northern Mariana Islands")   
 
-#main()
+    """
+    print('\t\t\t*******Antes***********')
+    procurar(l, pais = "Aruba", codPais = None, ano = None, val = None)
+	"""
+
+main()

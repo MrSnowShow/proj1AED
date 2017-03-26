@@ -27,12 +27,12 @@ def generateRandoms(l, countries):
     
     # Se calhar um pais tipo Northern Mariana Islands que nao tem dados
     if (ls == None):
-        randomYear = random.randrange(1960, 2016)
-        randomVal = random.randrange(0, 100)
+        randomYear = None
+        randomVal = None
     else:
         anos = ls.getNodeVals(tname)[2]
         valores = ls.getNodeVals(tname)[3]
-        randomIndex = random.randrange(0, len(anos))
+        randomIndex = random.randrange(0, len(valores))
         randomYear = int(anos[randomIndex])
         randomVal = float(valores[randomIndex])
     
@@ -46,8 +46,8 @@ def timeProcurar(l, randoms):
     return (end-start)*1000
 
 def timeInserir(l, randoms):
-    randomYear = str(random.randrange(1960, 2016))
-    randomVal = str(random.randrange(0, 100))
+    randomYear = random.randrange(1960, 2016)
+    randomVal = random.uniform(0, 100)
     
     start = timer()
     inserir(l, pais=randoms[0], codPais=randoms[1], ano=randomYear, val=randomVal)
@@ -63,9 +63,9 @@ def timeRemover(l, randoms):
     return (end-start)*1000
         
 def timeEditar(l, randoms):
-    randomVal = str(random.randrange(0, 100))
+    randomVal = random.uniform(0, 100)
     start = timer()
-    editar(l, pais=randoms[0], codPais=randoms[1], ano=randoms[2], val=randoms[3], nval=randomVal)
+    editar(l, pais=randoms[0], codPais=randoms[1], ano=randoms[2], nval=randomVal)
     end = timer()
     return (end-start)*1000
         
@@ -75,14 +75,14 @@ def testing():
     l3 = readCsv('dados.csv')
     l4 = readCsv('dados.csv')
     tuploPaises = readCountries('dados.csv') # Usado como argumento para criar randoms
-    randoms = generateRandoms(l, tuploPaises)    
+
     
     temposPro = [0]
     temposIns = [0]
     temposRem = [0]
     temposEdi = [0]    
-    
-    ciclos = 3000
+
+    ciclos = 500
     for i in range(ciclos):
         randoms = generateRandoms(l, tuploPaises)
         temposPro.append(temposPro[-1] + timeProcurar(l, randoms))
@@ -102,7 +102,6 @@ def testing():
     plt.ylabel('Time (ms)')
     plt.xlabel('Operations (n)')
     plt.show()
-    
     
     
 testing()

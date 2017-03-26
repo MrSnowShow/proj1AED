@@ -24,15 +24,17 @@ def generateRandoms(l, countries):
     randomPais = testPais[randomIndex]
     randomCod = testCod[randomIndex]
     
-    auxListaPaises = l.search(randomPais, None, None, None)
-    if (len(auxListaPaises) > 0):
-        randomIndexPais = random.randrange(0, len(auxListaPaises))
-        randomYear = auxListaPaises[randomIndexPais].getAno()    
-        randomVal = l.search(randomPais, None, randomYear)[0].getVal()        
+    ls = l.search(randomPais, None, None, None)
+    if ls:
+        anos = [a.getAno() for a in ls]
+        valores = [v.getVal() for v in ls]
+        index = random.randrange(0, len(anos))
+        randomAno = int(anos[index])
+        randomVal = float(valores[index])
     else:
-        randomYear = str(random.randrange(1960, 2016))
-        randomVal = ""
-    return (randomPais, randomCod, randomYear, randomVal)
+        randomAno = None
+        randomVal = None
+    return (randomPais, randomCod, randomAno, randomVal)
     
 def timeProcurar(l, randoms):
     start = timer()
@@ -42,8 +44,8 @@ def timeProcurar(l, randoms):
     return (end-start)*1000
 
 def timeInserir(l, randoms):
-    randomYear = str(random.randrange(1960, 2016))
-    randomVal = str(random.randrange(0, 100))
+    randomYear = random.randrange(1960, 2016)
+    randomVal = random.uniform(0, 100)
     
     start = timer()
     inserir(l, pais=randoms[0], codPais=randoms[1], ano=randomYear, val=randomVal)
@@ -59,10 +61,12 @@ def timeRemover(l, randoms):
     return (end-start)*1000
         
 def timeEditar(l, randoms):
-    randomVal = str(random.randrange(0, 100))
+    randomVal = random.uniform(0, 100)
+
     start = timer()
     editar(l, pais=randoms[0], codPais=randoms[1], ano=randoms[2], val=randoms[3], nval=randomVal)
     end = timer()
+
     return (end-start)*1000
         
 def testing():
@@ -72,20 +76,21 @@ def testing():
     l4 = readCsv('dados.csv')
     tuploPaises = readCountries('dados.csv') # Usado como argumento para criar randoms
     randoms = generateRandoms(l, tuploPaises)
-    
+
     temposPro = [0]
     temposIns = [0]
     temposRem = [0]
     temposEdi = [0]
+
     
-    ciclos = 1000
+    ciclos = 500
     for i in range(ciclos):
         randoms = generateRandoms(l, tuploPaises)
         temposPro.append(temposPro[-1] + timeProcurar(l, randoms))
         temposIns.append(temposIns[-1] + timeInserir(l2, randoms))
         temposRem.append(temposRem[-1] + timeRemover(l3, randoms))
         temposEdi.append(temposEdi[-1] + timeEditar(l4, randoms))
-        
+
     print("Tempo medio procurar() - ", temposPro[-1] / (len(temposPro)-1), "ms")
     print("Tempo medio inserir() - ", temposIns[-1] / (len(temposIns)-1), "ms")
     print("Tempo medio remover() - ", temposRem[-1] / (len(temposRem)-1), "ms")    

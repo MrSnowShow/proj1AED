@@ -142,20 +142,27 @@ class bst:
     def remover(self, r):
 
         if r.getLeft() == r.getRight() == None:
+            if  r.getParent():
+                if r.getParent().getLeft() == r:
 
-            if r.getParent().getLeft() == r:
+                    r.getParent().setLeft(None)
+                else:
+                    r.getParent().setRight(None)
+        elif r.getLeft() and r.getRight():
+            subs = self.sub(r)
+            self.removeSub(subs)
+            r.setPais(subs.getPais())
+            r.setCodPais(subs.getCodPais())
+            r.setAno(subs.getAno())
+            r.setVal(subs.getVal())
 
-                r.getParent().setLeft(None)
-            else:
-
-                r.getParent().setRight(None)
         elif r.getLeft():
 
-            if r.getParent().getLeft() == r:
+            if r.getParent() and r.getParent().getLeft() == r:
 
                 r.getLeft().setParent(r.getParent())
                 r.getParent().setLeft(r.getLeft())
-            elif r.getParent().getRight() == r:
+            elif r.getParent() and  r.getParent().getRight() == r:
 
                 r.getLeft().setParent(r.getParent())
                 r.getParent().setRight(r.getLeft())
@@ -167,25 +174,17 @@ class bst:
 
         elif r.getRight():
 
-            if r.getParent().getLeft() == r:
+            if r.getParent() and  r.getParent().getLeft() == r:
                 r.getRight().setParent(r.getParent())
                 r.getParent().setLeft(r.getRight())
 
-            elif r.getParent().getRight() == r:
+            elif r.getParent() and  r.getParent().getRight() == r:
                 r.getRight().setParent(r.getParent())
                 r.getParent().setRight(r.getRight())
             else:
                 lf = r.getRight()
                 r.setRight(None)
                 self.replace(lf, r)
-        else:
-            subs = self.sub(r)
-            self.removeSub(subs)
-            r.setPais(subs.getPais())
-            r.setCodPais(subs.getCodPais())
-            r.setAno(subs.getAno())
-            r.setVal(subs.getVal())
-
     def sub(self, node):
 
         subs = None

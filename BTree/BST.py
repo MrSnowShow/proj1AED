@@ -65,7 +65,7 @@ class bst:
             l = l + self.doSearch(root.getRight(), pais, ano, val)
         return l
 
-    def search(self, codPais = None, pais = None, ano = None, val = None):
+    def search(self, pais = None, codPais = None, ano = None, val = None):
         l = []
 
         if codPais:
@@ -102,11 +102,11 @@ class bst:
     def getRoot(self):
         return self.root
 
-    def edit(self, codPais = None, pais = None, ano = None, val = None, ncodPais = None, npais = None, nano = None, nval = None):
+    def edit(self, pais = None, codPais = None, ano = None, val = None, ncodPais = None, npais = None, nano = None, nval = None):
 
         l = []
 
-        l = self.search(codPais, pais, ano, val)
+        l = self.search(pais, codPais, ano, val)
 
 
         if len(l) > 0:
@@ -131,22 +131,31 @@ class bst:
             return True
         return False
 
+    
     def removeNode(self, r):
         if r.getLeft() == r.getRight() == None:
+            if r.getParent():
+                if r.getParent().getLeft() == r:
 
-            if r.getParent().getLeft() == r:
+                    r.getParent().setLeft(None)
+                else:
 
-                r.getParent().setLeft(None)
-            else:
+                    r.getParent().setRight(None)
+        elif r.getLeft() and r.getRight():
+            subs = self.sub(r)
+            self.removeSub(subs)
+            r.setPais(subs.getPais())
+            r.setCodPais(subs.getCodPais())
+            r.setAno(subs.getAno())
+            r.setVal(subs.getVal())
 
-                r.getParent().setRight(None)
         elif r.getLeft():
 
-            if r.getParent().getLeft() == r:
+            if r.getParent() and  r.getParent().getLeft() == r:
 
                 r.getLeft().setParent(r.getParent())
                 r.getParent().setLeft(r.getLeft())
-            elif r.getParent().getRight() == r:
+            elif r.getParent() and  r.getParent().getRight() == r:
 
                 r.getLeft().setParent(r.getParent())
                 r.getParent().setRight(r.getLeft())
@@ -158,24 +167,18 @@ class bst:
 
         elif r.getRight():
 
-            if r.getParent().getLeft() == r:
+            if r.getParent() and r.getParent().getLeft() == r:
                 r.getRight().setParent(r.getParent())
                 r.getParent().setLeft(r.getRight())
 
-            elif r.getParent().getRight() == r:
+            elif r.getParent() and  r.getParent().getRight() == r:
                 r.getRight().setParent(r.getParent())
                 r.getParent().setRight(r.getRight())
             else:
                 lf = r.getRight()
                 r.setRight(None)
                 self.replace(lf, r)
-        else:
-            subs = self.sub(r)
-            self.removeSub(subs)
-            r.setPais(subs.getPais())
-            r.setCodPais(subs.getCodPais())
-            r.setAno(subs.getAno())
-            r.setVal(subs.getVal())
+
 
     def remover(self, codPais = None, pais = None, ano = None, val = None):
 
@@ -193,13 +196,22 @@ class bst:
                 else:
 
                     r.getParent().setRight(None)
+
+            elif r.getLeft() and r.getRight():
+                subs = self.sub(r)
+                self.removeSub(subs)
+                r.setPais(subs.getPais())
+                r.setCodPais(subs.getCodPais())
+                r.setAno(subs.getAno())
+                r.setVal(subs.getVal())
+                
             elif r.getLeft():
 
-                if r.getParent().getLeft() == r:
+                if r.getParent() and r.getParent().getLeft() == r:
 
                     r.getLeft().setParent(r.getParent())
                     r.getParent().setLeft(r.getLeft())
-                elif r.getParent().getRight() == r:
+                elif r.getParent() and r.getParent().getRight() == r:
 
                     r.getLeft().setParent(r.getParent())
                     r.getParent().setRight(r.getLeft())
@@ -211,25 +223,17 @@ class bst:
 
             elif r.getRight():
 
-                if r.getParent().getLeft() == r:
+                if r.getParent() and r.getParent().getLeft() == r:
                     r.getRight().setParent(r.getParent())
                     r.getParent().setLeft(r.getRight())
 
-                elif r.getParent().getRight() == r:
+                elif r.getParent() and r.getParent().getRight() == r:
                     r.getRight().setParent(r.getParent())
                     r.getParent().setRight(r.getRight())
                 else:
                     lf = r.getRight()
                     r.setRight(None)
                     self.replace(lf, r)
-            else:
-                subs = self.sub(r)
-                self.removeSub(subs)
-                r.setPais(subs.getPais())
-                r.setCodPais(subs.getCodPais())
-                r.setAno(subs.getAno())
-                r.setVal(subs.getVal())
-
     def sub(self, node):
 
         subs = None
@@ -292,7 +296,3 @@ class bst:
         toNode.setParent(fromNode.getParent())
         toNode.setLeft(fromNode.getLeft())
         toNode.setRight(fromNode.getRight())
-
-
-
-

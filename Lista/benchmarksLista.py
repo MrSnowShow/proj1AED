@@ -30,8 +30,8 @@ def generateRandoms(l, countries):
         randomYear = auxListaPaises[randomIndexPais].getAno()    
         randomVal = l.search(randomPais, None, randomYear)[0].getVal()        
     else:
-        randomYear = random.randrange(1960, 2016)
-        randomVal = random.uniform(0, 100)
+        randomYear = None
+        randomVal = None
     return (randomPais, randomCod, randomYear, randomVal)
     
 def timeProcurar(l, randoms):

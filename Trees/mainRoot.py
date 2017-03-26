@@ -20,6 +20,11 @@ class MainRoot:
     def getTVal(self):
         return self.tVal
 
+    def checkTreesEmpty(self):
+        if not (self.tPais and self.tCodPais and self.tAno and self.tVal):
+            return True
+        return False
+
     def add(self, pais, codPais, ano, val):
 
         nPais = TNode(pais=pais)

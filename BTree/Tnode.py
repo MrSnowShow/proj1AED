@@ -12,9 +12,6 @@ class TNode:
         self.right = right
 
 
-
-
-
     def getLeft(self):
         return self.left
 
@@ -67,6 +64,3 @@ class TNode:
         s = s + 'Pais: ' + self.pais + '\nCódigo: ' + self.codPais +'\nAno: ' + str(self.ano) + '\nTaxa: ' + str(self.val)
 
         return s
-
-
-
