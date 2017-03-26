@@ -79,7 +79,7 @@ def testing():
     temposRem = [0]
     temposEdi = [0]
     
-    ciclos = 3000
+    ciclos = 500
     for i in range(ciclos):
         randoms = generateRandoms(l, tuploPaises)
         temposPro.append(temposPro[-1] + timeProcurar(l, randoms))
